@@ -1,6 +1,7 @@
 import numpy as np
 import math
 from im2col import im2col_indices
+from prototypes.bitserial_gemm import bitserial_gemm_wrapper
 
 def convert(qnn):
   new_qnn = []
@@ -73,7 +74,8 @@ class QNNFullyConnectedLayer(QNNLayer):
         self.W = W
 
     def execute(self, v):
-        return np.dot(self.W, v)
+        return bitserial_gemm_wrapper(self.W, v)
+        #return np.dot(self.W, v)
 
 class QNNThresholdingLayer(QNNLayer):
     "Given a set of thresholds, return the number of thresholds crossed."

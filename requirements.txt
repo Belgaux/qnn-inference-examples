@@ -1,0 +1,5 @@
+numpy
+pil
+matplotlib
+bitstring
+
